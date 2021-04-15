@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\User;
 class CandidateController extends Controller
 {
     public function __construct(){
@@ -27,5 +27,8 @@ class CandidateController extends Controller
       ]);
       $candidate=Candidate::create(['name'=>$request->name,'email'=>$request->email]);
       $request->avatar->storeAs('public',$candidate->id);
+    }
+    public function vote(Candidate $candidate,User $user){
+        
     }
 }

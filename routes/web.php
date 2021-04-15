@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::get('candidates',[CandidateController::class,'index'])->name('candidates');
 Route::get('register',[CandidateController::class,'register'])->name('register');
 Route::post('register',[CandidateController::class,'store'])->name('register.submit');
+Route::post('/vote/{candidate}/{user}',[CandidateController::class,'vote']);
