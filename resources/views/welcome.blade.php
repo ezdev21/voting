@@ -1,14 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>voting</title>
-</head>
-<body>
-    <a href="{{route('candidates')}}">vote</a>
-    <a href="{{route('register')}}">register</a>
-</body>
-</html>
+@extends('layouts.app')
+@section('content')
+    <div>
+    <a href="{{route('vote.register')}}" class="text-xl text-tale-800">register for vote</a>
+    <a href="{{route('candidates')}}" class="text-xl text-blue-900">vote</a>
+    </div>
+@endsection

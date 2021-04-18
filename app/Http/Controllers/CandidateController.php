@@ -13,7 +13,7 @@ class CandidateController extends Controller
     }
     public function index()
     {
-        $candidates=Candidate::orderBy('score')->get();
+        $candidates=Candidate::latest()->get();
         return view('candidates',['candidates'=>$candidates]);
     }
     public function register(){
