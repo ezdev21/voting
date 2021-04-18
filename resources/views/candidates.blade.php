@@ -4,9 +4,10 @@
         <div>
             @forelse ($candidates as $candidate)
                 <img src="'public/candidates'.{{$candidate->id}}" alt="candidate photo" width="100px">
-                <p>{{$candidate->name}} <span>{{$candidate->voters->count()}}</span>
+                <p>{{$candidate->name}}
+                    <voteComponent userId="{{Auth::user()->id}}">
                     @can('vote',Candidate::class)
-                      <buttonComponent candidate="{{$candidate}}" user="{{Auth::user()}}"/>
+                      <buttonComponent candidateId="{{$candidate->id}}" userId="{{Auth::user()->id}}"/>
                     @endcan
                 </p>
             @empty

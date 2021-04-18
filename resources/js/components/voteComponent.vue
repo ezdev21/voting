@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-    props:['candidate','user'],
+    props:['candidateId','userId'],
     data() {
         message:''
     },

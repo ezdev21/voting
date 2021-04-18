@@ -26,7 +26,7 @@ class CandidateController extends Controller
           'avatar'=>['required','image']
       ]);
       $candidate=Candidate::create(['name'=>$request->name,'email'=>$request->email]);
-      $request->avatar->storeAs('public',$candidate->id);
+      $request->avatar->storeAs('candidates',$candidate->id,'public');
     }
     public function vote(Candidate $candidate,User $user){
         
