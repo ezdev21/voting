@@ -20,13 +20,14 @@ class CandidateController extends Controller
         return view('register');
     }
     public function store(Request $request){
-      $this->validate($request,[
-          'name'=>['requred','string','min:4',],
-          'email'=>['required','email'],
-          'avatar'=>['required','image']
-      ]);
+    //   $this->validate($request,[
+    //       'name'=>['requred','string','min:4',],
+    //       'email'=>['required','email'],
+    //       'avatar'=>['required','image']
+    //   ]);
       $candidate=Candidate::create(['name'=>$request->name,'email'=>$request->email]);
       $request->avatar->storeAs('candidates',$candidate->id,'public');
+      return redirect()->route('candidates');
     }
     public function vote(Candidate $candidate,User $user){
         

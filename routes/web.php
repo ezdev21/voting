@@ -27,3 +27,6 @@ Route::prefix('vote')->group(function (){
     Route::post('register',[CandidateController::class,'store'])->name('vote.register.submit');
     Route::post('vote/{candidate}/{user}',[CandidateController::class,'vote']);
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
