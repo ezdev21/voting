@@ -1879,7 +1879,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['candidateId', 'userId'],
   data: function data() {
-    message: '';
+    return {
+      message: null
+    };
   },
   computed: {},
   methods: {
@@ -1887,14 +1889,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/vote', {
-        candidateId: this.candidate.id,
-        userId: this.user.id
+        candidateId: this.candidateId,
+        userId: this.userId
       }).then(function (response) {
-        _this.message = 'successfully voted' + _this.candidate.name;
-        _this.$ref.message.style.color = "green";
+        _this.message = 'successfully voted ' + _this.candidate.name;
+        _this.$refs.message.style.color = "green";
+        console.log('voting succesfull');
       })["catch"](function (err) {
         _this.message = 'unsuccesful please try again';
         _this.$ref.message.style.color = "red";
+        console.log('unseccusfull');
       });
     }
   }
