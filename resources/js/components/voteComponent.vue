@@ -15,7 +15,7 @@ export default {
     },
     methods:{
          vote(){
-            axios.post('/vote',{candidateId=this.candidate.id,userId=this.user.id})
+            axios.post('/vote',{candidateId:this.candidate.id,userId:this.user.id})
             .then(response=>{
                 this.message='successfully voted'+this.candidate.name;
                 this.$ref.message.style.color="green";

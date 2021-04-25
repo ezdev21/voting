@@ -1,19 +1,14 @@
 <template>
-    <p>{{newResult()}}</p>
+    <p>{{result}}</p>
 </template>
 <script>
     export default{
-        props:['candidateId'],
+        props:['score'],
         data(){
-            result:null
-        },
-        computed:{
-            async newResult(){
-                const data=await axios.get('/result')
-                .then(res=>{
-                    this.result-res.data.result;
-                })
+            return{
+                result:this.score
             }
-        }
+        },
+        
     }
 </script>

@@ -5,10 +5,10 @@
                 @forelse ($candidates as $candidate)
                 <div class="p-2 m-3 shadow-xl">
                   <img src="/storage/candidates/{{$candidate->id}}.jpg" alt="candidate photo" width="200px">
-                  <p><span class="text-xl text-blue-900">{{$candidate->name}}</span>
-                    <resultComponent userId="{{$candidate->id}}">
+                  <p><span class="text-xl text-blue-900 font-bold">{{$candidate->name}}</span>
+                    <result-component score="{{$candidate->voters()->count()}}"></result-component>
                     @can('vote',Auth::user())
-                      <voteComponent candidateId="{{$candidate->id}}" userId="{{Auth::user()->id}}"/>
+                      <vote-component candidateId="{{$candidate->id}}" userId="{{Auth::user()->id}}"></vote-component>
                     @endcan
                   </p>
                 </div>

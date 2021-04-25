@@ -25,7 +25,8 @@ Route::prefix('vote')->group(function (){
     Route::get('candidates',[CandidateController::class,'index'])->name('candidates');
     Route::get('register',[CandidateController::class,'register'])->name('vote.register');
     Route::post('register',[CandidateController::class,'store'])->name('vote.register.submit');
-    Route::post('vote/{candidate}/{user}',[CandidateController::class,'vote']);
+    Route::post('/vote',[CandidateController::class,'vote']);
+    Route::get('result/{candiadteId}',[CandidateCotroller::class,'result']);
 });
 Auth::routes();
 
