@@ -1,32 +1,36 @@
 <template>
     <div>
-     <button @click="vote">vote</button class="bg-blue-900 text-xl text-white">
-     <p v-if="message" v-text="message" ref="message" />
+     <button @click="vote" class="bg-blue-900 text-xl text-green">vote</button>
+     <p id="message" class="text-xl text-bold italic">{{message}}</p>
     </div>
 </template>
 <script>
 export default {
-    props:['candidateId','userId'],
-    data() {
-        return{
-            message:null
+    props:{
+        candidateid:{
+            type:String
+        },
+        userid:{
+            type:String
         }
     },
-    computed:{
-        
+    data() {
+        return{
+            message:'',
+        }
+    },
+    mounted(){
     },
     methods:{
          vote(){
-            axios.post('/vote',{candidateId:this.candidateId,userId:this.userId})
+            axios.post('/vote/vote/'+this.candidateid+'/'+this.userid)
             .then(response=>{
-                this.message='successfully voted '+this.candidate.name;
-                this.$refs.message.style.color="green";
-                console.log('voting succesfull');
+                this.message='successfully voted ';
+                document.getElementById('message').style.color='green';
             })
             .catch(err =>{
                 this.message='unsuccesful please try again'
-                this.$ref.message.style.color="red";
-                console.log('unseccusfull');
+                document.getElementById('message').style.color='red';
             })
           }
     }

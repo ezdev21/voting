@@ -23,18 +23,24 @@ class CandidateController extends Controller
     }
     public function store(Request $request){
       $this->validate($request,[
-          'name'=>['requred','string','min:4',],
+          'name'=>['required','string','min:4','max:20'],
           'email'=>['required','email'],
           'avatar'=>['required','image']
       ]);
-      $candidate=Candidate::create(['name'=>$request->name,'email'=>$request->email]);
-      $request->avatar->storeAs('candidates',$candidate->id.getClientMimeType(),'public');
+      $candidate=new candidate;
+      $candidate->email=$request->email;
+      $candidate->name=$request->name;
+      $filename=$candidate->email.''.$request->avatar->getClientMimeType();
+      $candidate->avatar=$filename;
+      $candidate->save();
+      $request->avatar->storeAs('candidates',$filename,'public');
       return redirect()->route('candidates');
     }
-    public function vote(Request $request){
-        $candidateId=$request->candidateId;
-        $userId=$request->userId;
-        DB::table('users')->where('id',$userId)->update('candidate_id',$candidateId);
+    public function vote($candidateId,$userId){
+        $user=User::findOrFail($userId);
+        $user->candidate_id=$candidateId;
+        $user->save();
+        return true;
     }
     public function result($id)
     {

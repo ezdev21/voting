@@ -1,5 +1,5 @@
 <template>
-    <p>{{result}}</p>
+    <p class="text-green-900 text-bold">{{result}}</p>
 </template>
 <script>
     export default{
@@ -9,6 +9,17 @@
                 result:this.score
             }
         },
-        
+        computed:{
+            async update()
+            {
+                const result=await axios.get('/vote/'+this.candidateid)
+                .then(res=>{
+                    this.result=res.data;
+                })
+                .catch(err=>{
+                  console.log('error in fetching data');
+                });
+            }
+        }
     }
 </script>

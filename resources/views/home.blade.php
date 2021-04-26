@@ -2,22 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+    <div>
+        <a href="{{route('vote.register')}}" class="text-xl text-tale-800">register for vote</a>
+        <a href="{{route('candidates')}}" class="text-xl text-blue-900">vote</a>
     </div>
 </div>
 @endsection

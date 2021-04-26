@@ -46,7 +46,7 @@ class CandidatePolicy
     
     public function vote(User $user)
     {
-        return $user->candidate==null;
+        return $user->candidate()==null;
     }
     /**
      * Determine whether the user can update the model.

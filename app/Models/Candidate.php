@@ -9,6 +9,7 @@ class Candidate extends Model
 {
     use HasFactory;
     protected $guarded=[];
+    
     public function voters()
     {
      return $this->hasMany(User::class);
