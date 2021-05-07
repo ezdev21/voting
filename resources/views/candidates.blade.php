@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <div>
-  <a href="{{route('vote.register')}}" class="text-xl text-tale-800">register for vote</a>
   </div>
-        <div id="app" class="flex flex-row flex-wrap ">
+        <div id="app" class="flex flex-wrap">
                 @forelse ($candidates as $candidate)
-                <div class="p-2 m-3 shadow-xl">
-                  <img src="/storage/candidates/{{$candidate->avatar}}" alt="candidate photo" width="200px">
+                <div class="flex-auto p-2 m-3 shadow-xl">
+                  <img src="storage/candidates/{{$candidate->avatar}}" alt="candidate photo" width="200px">
                   <p><span class="text-xl text-blue-900 font-bold">{{$candidate->name}}</span>
                     <result-component score="{{$candidate->voters()->count()}}" candidateid="{{$candidate->id}}"></result-component>
                     @can('vote',Auth::user())

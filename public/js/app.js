@@ -1935,7 +1935,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      message: ''
+      message: '',
+      voted: flase
     };
   },
   mounted: function mounted() {},
@@ -1946,6 +1947,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/vote/vote/' + this.candidateid + '/' + this.userid).then(function (response) {
         _this.message = 'successfully voted ';
         document.getElementById('message').style.color = 'green';
+        _this.voted = true;
       })["catch"](function (err) {
         _this.message = 'unsuccesful please try again';
         document.getElementById('message').style.color = 'red';
@@ -38375,22 +38377,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "button",
-      {
-        staticClass: "bg-blue-900 text-xl text-green",
-        on: { click: _vm.vote }
-      },
-      [_vm._v("vote")]
-    ),
-    _vm._v(" "),
-    _c(
-      "p",
-      { staticClass: "text-xl text-bold italic", attrs: { id: "message" } },
-      [_vm._v(_vm._s(_vm.message))]
-    )
-  ])
+  return !_vm.voted
+    ? _c("div", [
+        _c(
+          "button",
+          {
+            staticClass: "bg-blue-900 text-xl text-green",
+            on: { click: _vm.vote }
+          },
+          [_vm._v("vote")]
+        ),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "text-xl text-bold italic", attrs: { id: "message" } },
+          [_vm._v(_vm._s(_vm.message))]
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

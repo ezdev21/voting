@@ -22,6 +22,7 @@ class CandidateController extends Controller
         return view('register');
     }
     public function store(Request $request){
+      $this->authorize('create',Candidate::class);  
       $this->validate($request,[
           'name'=>['required','string','min:4','max:20'],
           'email'=>['required','email'],
@@ -30,10 +31,10 @@ class CandidateController extends Controller
       $candidate=new candidate;
       $candidate->email=$request->email;
       $candidate->name=$request->name;
-      $filename=$candidate->email.''.$request->avatar->getClientMimeType();
+      $filename=$candidate->email.'.'.$request->avatar->extension();
       $candidate->avatar=$filename;
       $candidate->save();
-      $request->avatar->storeAs('candidates',$filename,'public');
+      $request->avatar->storeAs('candidates',$candidate->avatar,'public');
       return redirect()->route('candidates');
     }
     public function vote($candidateId,$userId){
