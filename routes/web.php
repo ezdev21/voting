@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/',[CandidateController::class,'index'])->name('candidates');
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::prefix('vote')->group(function (){
     Route::get('candidates',[CandidateController::class,'index'])->name('candidates');
     Route::get('register',[CandidateController::class,'register'])->name('vote.register');
     Route::post('register',[CandidateController::class,'store'])->name('vote.register.submit');
-    Route::post('/vote/{candidateId}/{userId}',[CandidateController::class,'vote']);
-    Route::get('result/{candiadteId}',[CandidateCotroller::class,'result']);
+    Route::get('result',[CandidateController::class,'result']);
+    Route::post('vote',[CandidateController::class,'vote']);
 });
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

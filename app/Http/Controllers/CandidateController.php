@@ -37,16 +37,17 @@ class CandidateController extends Controller
       $request->avatar->storeAs('candidates',$candidate->avatar,'public');
       return redirect()->route('candidates');
     }
-    public function vote($candidateId,$userId){
-        $user=User::findOrFail($userId);
-        $user->candidate_id=$candidateId;
-        $user->save();
-        return true;
-    }
-    public function result($id)
+    public function result(Request $request)
     {
-        $candidate=Candidate::findOrFail($id);
-        $score=$candidate->voters()->count();
-        return response()->json(['score'=>$score]);
+        $candidate=Candidate::findOrFail($request->candidateId);
+        $user=User::findOrFail($request->userId);
+        $candidateScore=$candidate->users()->count();
+        $user->candidate ? $voted=true : $voted=false;
+        return response()->json(['candidateScore'=>$candidateScore,'voted'=>$voted]);
+    }
+    public function vote(Request $request){
+        $user=User::findOrFail($request->userId);
+        $user->candidate_id=$request->candidateId;
+        $user->save();
     }
 }
