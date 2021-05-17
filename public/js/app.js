@@ -1852,25 +1852,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    candidateid: {
-      type: String
-    },
-    userid: {
-      type: String
-    }
-  },
+  props: ['userId', 'candidateId'],
   data: function data() {
     return {
       message: '',
       voted: false,
+      voteText: 'vote',
       candidateScore: 0
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('vote/result', {
+    axios.get('/vote/result', {
       params: {
         userId: this.userId,
         candidateId: this.candidateId
@@ -1884,11 +1878,12 @@ __webpack_require__.r(__webpack_exports__);
     vote: function vote() {
       var _this2 = this;
 
-      axios.post('vote/vote', {
+      axios.post('/vote/vote', {
         userId: this.userId,
         candidateId: this.candidateId
       }).then(function (res) {
         _this2.voted = true;
+        _this2.voteText = "voted";
         _this2.candidateScore += 1;
       })["catch"](function (err) {});
     }
@@ -37451,22 +37446,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.voted
-    ? _c("div", { staticClass: "mx-auto" }, [
-        _c("p", { staticClass: "text-xl font-bold inline m-1" }, [
-          _vm._v(_vm._s(_vm.candidateScore))
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
+  return _c("div", { staticClass: "mx-auto" }, [
+    _c("p", { staticClass: "text-xl font-bold inline m-1" }, [
+      _vm._v(_vm._s(_vm.candidateScore))
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        directives: [
           {
-            staticClass: "bg-blue-900 text-xl text-white rounded p-1 px-4",
-            on: { click: _vm.vote }
-          },
-          [_vm._v("vote")]
-        )
-      ])
-    : _vm._e()
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.voted,
+            expression: "!voted"
+          }
+        ],
+        staticClass: "bg-blue-400 text-xl text-white rounded p-1 px-4",
+        on: { click: _vm.vote }
+      },
+      [_vm._v(_vm._s(_vm.voteText))]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
